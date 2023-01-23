@@ -2,7 +2,6 @@ package com.Project.demo.model;
 
 import java.io.Serializable;
 
-
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -16,8 +15,6 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-
 
 @Entity
 @Table(name = "USERS")
@@ -30,7 +27,10 @@ public class Users implements Serializable {
 	@Column(name = "USER_ID", updatable = false, nullable = false)
 	private Long userId;
 
-	@Column(name = "USERNAME")
+	@Column(name = "USER_EMAIL")
+	private String userEmail;
+
+	@Column(name = "USERNAME", unique = true)
 	private String userName;
 
 	@Column(name = "USER_PHONE_NUMBER")
@@ -47,16 +47,16 @@ public class Users implements Serializable {
 
 	@Column(name = "PASSWORD")
 	private String password;
-	
+
 	@Column(name = "USER_DOJ")
 	private Date userDOJ;
 
+
 	@OneToOne(fetch = FetchType.LAZY)
 	@MapsId("fileId")
-	@JoinColumn(name = "FILE_ID", referencedColumnName = "FILE_ID")
+	@JoinColumn(name = "FILE_ID", referencedColumnName = "FILE_ID", nullable = true)
 	private Files files;
-	
-	
+
 	public Files getFiles() {
 		return files;
 	}
@@ -113,6 +113,14 @@ public class Users implements Serializable {
 		this.userDOJ = userDOJ;
 	}
 
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
 	/*
 	 * // @JsonIgnore
 	 * 
@@ -127,6 +135,5 @@ public class Users implements Serializable {
 	 * public void setProjects(List<EmployeeToProject> projects) { this.projects =
 	 * projects; }
 	 */
-
 
 }

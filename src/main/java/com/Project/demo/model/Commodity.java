@@ -1,7 +1,6 @@
 package com.Project.demo.model;
 
 import java.io.Serializable;
-import java.util.Currency;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

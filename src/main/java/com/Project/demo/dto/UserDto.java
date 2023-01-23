@@ -12,9 +12,18 @@ public class UserDto implements Serializable {
 	private long userId;
 	private String userName;
 	private long userPhoneNumber;
-	private String userDesgination;
+	private String userDesignation;
 	private String password;
 	private Date userDOJ;
+	private String userEmail;
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+
+	public String getUserEmail() {
+		return userEmail;
+	}
 	//TO DO File
 	public long getUserId() {
 		return userId;
@@ -34,11 +43,13 @@ public class UserDto implements Serializable {
 	public void setUserPhoneNumber(long userPhoneNumber) {
 		this.userPhoneNumber = userPhoneNumber;
 	}
-	public String getUserDesgination() {
-		return userDesgination;
+
+	public String getUserDesignation() {
+		return userDesignation;
 	}
-	public void setUserDesgination(String userDesgination) {
-		this.userDesgination = userDesgination;
+
+	public void setUserDesignation(String userDesignation) {
+		this.userDesignation = userDesignation;
 	}
 	public String getPassword() {
 		return password;
