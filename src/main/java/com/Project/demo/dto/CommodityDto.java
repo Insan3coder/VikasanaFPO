@@ -1,76 +1,48 @@
-package com.Project.demo.model;
+package com.Project.demo.dto;
 
 import java.io.Serializable;
-import java.util.Currency;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Entity
-@Table(name = "COMMODITY")
-public class Commodity implements Serializable {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CommodityDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "SL_NO", updatable = false, nullable = false)
-	private Long slNo;
-
-	@Column(name = "COMMODITY_TYPE")
+	private long slNo;
 	private String commodityType;
-
-	@Column(name = "COMMODITY_NAME")
 	private String commodityName;
-
-	@Column(name = "QUANTITY")
 	private Float quantity;
-	
-	@Column(name = "PRICE")
 	private Float price;
-
-	public Long getSlNo() {
+	public long getSlNo() {
 		return slNo;
 	}
-
-	public void setSlNo(Long slNo) {
+	public void setSlNo(long slNo) {
 		this.slNo = slNo;
 	}
-
 	public String getCommodityType() {
 		return commodityType;
 	}
-
 	public void setCommodityType(String commodityType) {
 		this.commodityType = commodityType;
 	}
-
 	public String getCommodityName() {
 		return commodityName;
 	}
-
 	public void setCommodityName(String commodityName) {
 		this.commodityName = commodityName;
 	}
-
 	public Float getQuantity() {
 		return quantity;
 	}
-
 	public void setQuantity(Float quantity) {
 		this.quantity = quantity;
 	}
-
 	public Float getPrice() {
 		return price;
 	}
-
 	public void setPrice(Float price) {
 		this.price = price;
 	}
-
+	
+	
 }

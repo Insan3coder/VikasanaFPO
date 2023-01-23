@@ -1,11 +1,13 @@
 package com.Project.demo;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
 //@EnableAutoConfiguration
-//@EntityScan(basePackages = "com.Prpject.demo")
+//@EntityScan(basePackages = "com.Project.demo")
 public class ProjectV1Application {
 
 //	@Bean(name = "entityManagerFactory")
