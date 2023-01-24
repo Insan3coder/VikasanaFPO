@@ -42,17 +42,17 @@ public class Users implements Serializable {
 	 * @Column(name = "IS_MANAGER") private boolean isManager;
 	 */
 
-	@Column(name = "USER_DESIGNATION")
+	@Column(name = "USER_DESIGNATION", nullable = true)
 	private String userDesignation;
 
-	@Column(name = "PASSWORD")
+	@Column(name = "PASSWORD", nullable = true)
 	private String password;
 
-	@Column(name = "USER_DOJ")
+	@Column(name = "USER_DOJ", nullable = true)
 	private Date userDOJ;
 
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, optional = true)
 	@MapsId("fileId")
 	@JoinColumn(name = "FILE_ID", referencedColumnName = "FILE_ID", nullable = true)
 	private Files files;

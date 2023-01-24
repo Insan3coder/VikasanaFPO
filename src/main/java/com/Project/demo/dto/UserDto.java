@@ -16,6 +16,15 @@ public class UserDto implements Serializable {
 	private String password;
 	private Date userDOJ;
 	private String userEmail;
+	private long fileId;
+
+	public void setFileId(long fileId) {
+		this.fileId = fileId;
+	}
+
+	public long getFileId() {
+		return fileId;
+	}
 
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
