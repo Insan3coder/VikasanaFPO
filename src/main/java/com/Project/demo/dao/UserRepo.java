@@ -17,4 +17,6 @@ public interface UserRepo extends JpaRepository<Users,Long>{
 	// %:userDesgination%")
 	List<Users> findByUserDesignation(String userDesignation);
 
+	void deleteByUserName(String userName);
+
 }

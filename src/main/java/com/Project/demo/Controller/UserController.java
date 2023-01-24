@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,10 +57,17 @@ public class UserController extends BaseController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public ResponseEntity<Object> createUser(@RequestParam(value = "file", required = false) MultipartFile file,
 			@RequestBody UserDto user) throws IOException {
-		if (file.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
+//		if (file.isEmpty()) {
+//			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//		}
 		userService.createUser(file, user);
 		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+	
+	@DeleteMapping(value = "/{userName}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public ResponseEntity<Object> deleteUser(@PathVariable("userName") String userName)  {
+		userService.removeUser(userName);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }

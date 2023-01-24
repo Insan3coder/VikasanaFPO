@@ -58,17 +58,24 @@ public class UserService extends BaseService {
 	}
 
 	public void createUser(MultipartFile file, UserDto user) throws IOException {
-		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-		Files fileDB = new Files(file.getContentType(), file.getBytes(), user.getUserDesignation());
 		Users userDB = new Users();
-		userDB.setFiles(fileDB);
+		if (file !=null) {
+			String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+			Files fileDB = new Files(file.getContentType(), file.getBytes(), user.getUserDesignation());
+			userDB.setFiles(fileDB);
+		}
 		userDB.setPassword(user.getPassword());
 		userDB.setUserName(user.getUserName());
 		userDB.setUserDesignation(user.getUserDesignation());
 		userDB.setUserDOJ(user.getUserDOJ());
 		userDB.setUserPhoneNumber(user.getUserPhoneNumber());
 		userDB.setUserEmail(user.getUserEmail());
+		userDB.setUserId(user.getUserId());
 		userRepo.save(userDB);
+	}
+
+	public void removeUser(String userName) {
+		 userRepo.deleteByUserName(userName);
 	}
 	
 	
