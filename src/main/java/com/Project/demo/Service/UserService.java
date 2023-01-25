@@ -1,6 +1,7 @@
 package com.Project.demo.Service;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,22 +24,24 @@ public class UserService extends BaseService {
 
 	// @Autowired
 	// private EmployeeRepo employeeRepo;
-	
-	  @Autowired 
-	  private UserRepo userRepo;
 
-		@Autowired
-		private FileRepo fileRepo;
+	@Autowired
+	private UserRepo userRepo;
+
+	@Autowired
+	private FileRepo fileRepo;
 
 	private Logger logger = LogManager.getLogger(UserService.class);
 
+	@Transactional(readOnly = true)
 	public List<UserDto> getUserslistAll() {
 		LogManager.getLogger("Inside Findall");
 		List<Users> users = userRepo.findAll();
 		List<UserDto> returnList = users.stream().map(x -> assignUserstoDto(x)).collect(Collectors.toList());
 		return returnList;
 	}
-	
+
+	@Transactional(readOnly = true)
 	public List<UserDto> getByUserDesignation(String userDesignation) {
 		LogManager.getLogger("Inside getByUserDesignation");
 		List<Users> users = userRepo.findByUserDesignation(userDesignation);
@@ -48,23 +52,33 @@ public class UserService extends BaseService {
 	public UserDto assignUserstoDto(Users user) {
 		UserDto userDto = new UserDto();
 		userDto.setUserId(user.getUserId());
-		userDto.setUserName(user.getUserName());
-		userDto.setUserDesignation(user.getUserDesignation());
-		userDto.setUserDOJ(user.getUserDOJ());
-		userDto.setUserPhoneNumber(user.getUserPhoneNumber());
-		userDto.setUserEmail(user.getUserEmail());
-		userDto.setFileId(user.getFiles().getFileId());
+		if (!user.getUserName().equals(null))
+			userDto.setUserName(user.getUserName());
+		if (user.getUserDesignation() != null && !user.getUserDesignation().equals(null))
+			userDto.setUserDesignation(user.getUserDesignation());
+		if (user.getUserDOJ() != null && !user.getUserDOJ().equals(null))
+			userDto.setUserDOJ(user.getUserDOJ());
+		if (user.getUserPhoneNumber() != null && !user.getUserPhoneNumber().equals(null))
+			userDto.setUserPhoneNumber(user.getUserPhoneNumber());
+		if (user.getUserEmail() != null && !user.getUserEmail().equals(null))
+			userDto.setUserEmail(user.getUserEmail());
+		if (user.getFiles() != null && !user.getFiles().equals(null))
+			userDto.setFileId(user.getFiles().getFileId());
 		return userDto;
 	}
 
+	@Transactional(readOnly = false, rollbackFor = SQLException.class)
 	public void createUser(MultipartFile file, UserDto user) throws IOException {
 		Users userDB = new Users();
-		if (file !=null) {
+		if (file != null) {
 			String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 			Files fileDB = new Files(file.getContentType(), file.getBytes(), user.getUserDesignation());
 			userDB.setFiles(fileDB);
 		}
-		userDB.setPassword(user.getPassword());
+		if (!user.getPassword().isEmpty())
+			userDB.setPassword(user.getPassword());
+		else
+			userDB.setPassword(null);
 		userDB.setUserName(user.getUserName());
 		userDB.setUserDesignation(user.getUserDesignation());
 		userDB.setUserDOJ(user.getUserDOJ());
@@ -74,10 +88,9 @@ public class UserService extends BaseService {
 		userRepo.save(userDB);
 	}
 
+	@Transactional(readOnly = false, rollbackFor = SQLException.class)
 	public void removeUser(String userName) {
-		 userRepo.deleteByUserName(userName);
+		userRepo.deleteByUserName(userName);
 	}
-	
-	
 
 }
