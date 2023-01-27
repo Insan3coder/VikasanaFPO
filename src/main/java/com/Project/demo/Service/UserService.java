@@ -68,24 +68,29 @@ public class UserService extends BaseService {
 	}
 
 	@Transactional(readOnly = false, rollbackFor = SQLException.class)
-	public void createUser(MultipartFile file, UserDto user) throws IOException {
-		Users userDB = new Users();
-		if (file != null) {
-			String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-			Files fileDB = new Files(file.getContentType(), file.getBytes(), user.getUserDesignation());
-			userDB.setFiles(fileDB);
-		}
-		if (!user.getPassword().isEmpty())
+	public String createUser(MultipartFile file, UserDto user) throws IOException {
+		try {
+
+			Users userDB = new Users();
+			if (file != null) {
+				String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+				Files fileDB = new Files(file.getContentType(), file.getBytes(), user.getUserDesignation());
+				userDB.setFiles(fileDB);
+			}
 			userDB.setPassword(user.getPassword());
-		else
-			userDB.setPassword(null);
-		userDB.setUserName(user.getUserName());
-		userDB.setUserDesignation(user.getUserDesignation());
-		userDB.setUserDOJ(user.getUserDOJ());
-		userDB.setUserPhoneNumber(user.getUserPhoneNumber());
-		userDB.setUserEmail(user.getUserEmail());
-		userDB.setUserId(user.getUserId());
-		userRepo.save(userDB);
+			userDB.setUserName(user.getUserName());
+			userDB.setUserDesignation(user.getUserDesignation());
+			userDB.setUserDOJ(user.getUserDOJ());
+			userDB.setUserPhoneNumber(user.getUserPhoneNumber());
+			userDB.setUserEmail(user.getUserEmail());
+			userDB.setUserId(user.getUserId());
+			userRepo.save(userDB);
+			return "Successfull";
+
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return e.getMessage();
+		}
 	}
 
 	@Transactional(readOnly = false, rollbackFor = SQLException.class)

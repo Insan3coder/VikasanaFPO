@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-//@EnableAutoConfiguration
-//@EntityScan(basePackages = "com.Project.demo")
+@EnableAutoConfiguration
+@EntityScan(basePackages = "com.Project.demo")
 public class ProjectV1Application {
 
 //	@Bean(name = "entityManagerFactory")

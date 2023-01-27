@@ -62,8 +62,11 @@ public class UserController { // extends BaseController {
 //		if (file.isEmpty()) {
 //			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 //		}
-		userService.createUser(file, user);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+String str = userService.createUser(file, user);
+if (str.equals("Successfull"))
+	return new ResponseEntity<>(HttpStatus.CREATED);
+else
+	return new ResponseEntity<Object>(str, null, HttpStatus.NOT_ACCEPTABLE);
 	}
 	
 	@DeleteMapping(value = "/{userName}")
