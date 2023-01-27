@@ -74,7 +74,7 @@ public class UserService extends BaseService {
 			Users userDB = new Users();
 			if (file != null) {
 				String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-				Files fileDB = new Files(file.getContentType(), file.getBytes(), user.getUserDesignation());
+				Files fileDB = new Files(file.getContentType(), file.getBytes(), fileName);
 				userDB.setFiles(fileDB);
 			}
 			userDB.setPassword(user.getPassword());
@@ -85,7 +85,7 @@ public class UserService extends BaseService {
 			userDB.setUserEmail(user.getUserEmail());
 			userDB.setUserId(user.getUserId());
 			userRepo.save(userDB);
-			return "Successfull";
+			return "Successful";
 
 		} catch (Exception e) {
 			logger.error(e.getMessage());

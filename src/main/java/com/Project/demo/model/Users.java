@@ -15,7 +15,6 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "USERS")
 public class Users implements Serializable {

@@ -20,7 +20,7 @@ public class Roles implements Serializable {
 	@Column(name = "ROLE_ID", updatable = false, nullable = false)
 	private Long roleId;
 
-	@Column(name = "ROLE_NAME", nullable = false)
+	@Column(name = "ROLE_NAME", nullable = false, unique = true)
 	private String roleName;
 
 	public Long getRoleId() {

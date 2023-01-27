@@ -26,7 +26,7 @@ import com.Project.demo.dto.UserDto;
 @Component
 @RestController()
 //@CrossOrigin(origins = "http://localhost:8081")
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController { // extends BaseController {
 
 	// @Autowired
@@ -63,10 +63,10 @@ public class UserController { // extends BaseController {
 //			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 //		}
 String str = userService.createUser(file, user);
-if (str.equals("Successfull"))
+if (str.equals("Successful"))
 	return new ResponseEntity<>(HttpStatus.CREATED);
 else
-	return new ResponseEntity<Object>(str, null, HttpStatus.NOT_ACCEPTABLE);
+	return new ResponseEntity<Object>(str, null, HttpStatus.BAD_REQUEST);
 	}
 	
 	@DeleteMapping(value = "/{userName}")
