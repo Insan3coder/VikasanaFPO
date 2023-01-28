@@ -3,11 +3,13 @@ package com.Project.demo.Service;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContextException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -18,6 +20,8 @@ import com.Project.demo.dao.UserRepo;
 import com.Project.demo.dto.UserDto;
 import com.Project.demo.model.Files;
 import com.Project.demo.model.Users;
+
+import ch.qos.logback.core.joran.conditional.ElseAction;
 
 @Service
 public class UserService extends BaseService {
@@ -34,11 +38,29 @@ public class UserService extends BaseService {
 	private Logger logger = LogManager.getLogger(UserService.class);
 
 	@Transactional(readOnly = true)
-	public List<UserDto> getUserslistAll() {
-		LogManager.getLogger("Inside Findall");
-		List<Users> users = userRepo.findAll();
-		List<UserDto> returnList = users.stream().map(x -> assignUserstoDto(x)).collect(Collectors.toList());
-		return returnList;
+	public List<UserDto> getUserslistAll(String designation, Long userId, String userName) {
+		try {
+
+			LogManager.getLogger("Inside Findall");
+
+			if (Objects.isNull(userName) && Objects.isNull(designation) && Objects.isNull(userId))
+				return userRepo.findAll().stream().map(x -> assignUserstoDto(x)).collect(Collectors.toList());
+			else if (Objects.isNull(userName) && Objects.isNull(designation))
+				return userRepo.findById(userId).stream().map(x -> assignUserstoDto(x)).collect(Collectors.toList());
+			else if (Objects.isNull(userId) && !Objects.isNull(userName) && Objects.isNull(designation))
+				return userRepo.findByUserName(userName).stream().map(x -> assignUserstoDto(x))
+						.collect(Collectors.toList());
+			else if (!Objects.isNull(designation))
+				return userRepo.findByUserDesignation(designation).stream().map(x -> assignUserstoDto(x))
+						.collect(Collectors.toList());
+			else
+				return null;
+
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			throw new ApplicationContextException(e.getMessage());
+		}
+
 	}
 
 	@Transactional(readOnly = true)

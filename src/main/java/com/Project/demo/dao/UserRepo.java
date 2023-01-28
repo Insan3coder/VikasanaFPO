@@ -11,7 +11,7 @@ import com.Project.demo.model.Users;
 @Repository
 public interface UserRepo extends JpaRepository<Users,Long>{ 
 	
-	Users findByUserName(String userName);
+	List<Users> findByUserName(String userName);
 
 	// @Query(value = "select e from Users e where e.userDesignation like
 	// %:userDesgination%")

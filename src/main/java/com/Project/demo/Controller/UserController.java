@@ -37,21 +37,24 @@ public class UserController { // extends BaseController {
 
 	private Logger logger = LogManager.getLogger(UserController.class);
 
-	@GetMapping(value = "/{designation}")
-	@ResponseStatus(code = HttpStatus.OK)
-	public List<UserDto> UserView(@PathVariable("designation") String designation) {
-		logger.debug("Inside UserView");
-		List<UserDto> listEmployee = userService.getByUserDesignation(designation);
-		logger.debug("Exiting UserView");
-		return listEmployee;
-		// return "index.html";
-	}
+	// @GetMapping(value = "/{designation}")
+	// @ResponseStatus(code = HttpStatus.OK)
+	// public List<UserDto> UserView(@PathVariable("designation") String
+	// designation) {
+	// logger.debug("Inside UserView");
+	// List<UserDto> listEmployee = userService.getByUserDesignation(designation);
+	// logger.debug("Exiting UserView");
+	// return listEmployee;
+	// // return "index.html";
+	// }
 	
 	@GetMapping()
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<UserDto> getAll() {
+	public List<UserDto> getAll(@RequestParam(value = "designation", required = false) String designation,
+			@RequestParam(value = "userId", required = false) Long userId,
+			@RequestParam(value = "userName") String userName) {
 		LogManager.getLogger("Inside Findall");
-		List<UserDto> users = userService.getUserslistAll();
+		List<UserDto> users = userService.getUserslistAll(designation, userId, userName);
 		return users;
 	}
 
