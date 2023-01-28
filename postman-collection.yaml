@@ -1,0 +1,370 @@
+{
+  "collection":
+    {
+      "info":
+        {
+          "_postman_id": "8f6ec3cd-b8dc-482f-8085-1761fa3fef49",
+          "name": "Vikasa FPO",
+          "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+          "updatedAt": "2023-01-28T14:55:59.000Z",
+        },
+      "item":
+        [
+          {
+            "name": "Users APIs",
+            "item":
+              [
+                {
+                  "name": "Get all users",
+                  "id": "33197bb6-9e02-499c-a014-d86c9689b1a0",
+                  "protocolProfileBehavior": { "disableBodyPruning": true },
+                  "request":
+                    {
+                      "method": "GET",
+                      "header": [],
+                      "url":
+                        {
+                          "raw": "localhost:8080/user",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["user"],
+                        },
+                    },
+                  "response": [],
+                },
+                {
+                  "name": "Create User",
+                  "id": "da7ca2f8-d067-424e-89ac-dda4a43d436f",
+                  "protocolProfileBehavior": { "disableBodyPruning": true },
+                  "request":
+                    {
+                      "method": "POST",
+                      "header": [],
+                      "body":
+                        {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"userName\":\"abc\"\r\n}",
+                          "options": { "raw": { "language": "json" } },
+                        },
+                      "url":
+                        {
+                          "raw": "localhost:8080/users",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["users"],
+                        },
+                    },
+                  "response": [],
+                },
+              ],
+            "id": "432812fa-7121-42f2-bdc7-52301497113e",
+          },
+          {
+            "name": "Roles APIs",
+            "item":
+              [
+                {
+                  "name": "List Roles",
+                  "id": "ddde689e-a631-4e49-aa8c-332b0ed79d9c",
+                  "protocolProfileBehavior": { "disableBodyPruning": true },
+                  "request":
+                    {
+                      "method": "GET",
+                      "header": [],
+                      "url":
+                        {
+                          "raw": "localhost:8080/role",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["role"],
+                        },
+                    },
+                  "response": [],
+                },
+                {
+                  "name": "Create roles",
+                  "id": "8982fc9d-6441-44fe-8c4d-479604760d31",
+                  "protocolProfileBehavior": { "disableBodyPruning": true },
+                  "request":
+                    {
+                      "method": "POST",
+                      "header": [],
+                      "body":
+                        {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"roleName\":\"Events\"\r\n}",
+                          "options": { "raw": { "language": "json" } },
+                        },
+                      "url":
+                        {
+                          "raw": "localhost:8080/role",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["role"],
+                        },
+                    },
+                  "response": [],
+                },
+                {
+                  "name": "Update Role",
+                  "id": "9ea3d330-b2a0-4f61-8e55-8ad7641b004c",
+                  "protocolProfileBehavior": { "disableBodyPruning": true },
+                  "request":
+                    {
+                      "method": "PUT",
+                      "header": [],
+                      "body":
+                        {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"roleName\":\"Directors\"\r\n}",
+                          "options": { "raw": { "language": "json" } },
+                        },
+                      "url":
+                        {
+                          "raw": "localhost:8080/role/69",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["role", "69"],
+                        },
+                    },
+                  "response": [],
+                },
+                {
+                  "name": "Delete Role",
+                  "id": "f2b0c193-6e90-4b47-8d44-12ea42b96f7b",
+                  "protocolProfileBehavior": { "disableBodyPruning": true },
+                  "request":
+                    {
+                      "method": "DELETE",
+                      "header": [],
+                      "url":
+                        {
+                          "raw": "localhost:8080/role/37",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["role", "37"],
+                        },
+                    },
+                  "response": [],
+                },
+              ],
+            "id": "02cba861-c73f-4ab7-bc62-aa8f695a48a7",
+          },
+          {
+            "name": "Events APIs",
+            "item":
+              [
+                {
+                  "name": "list Events",
+                  "id": "81aaae9a-74be-4c33-9495-6eb5c801731e",
+                  "protocolProfileBehavior": { "disableBodyPruning": true },
+                  "request":
+                    {
+                      "method": "GET",
+                      "header": [],
+                      "url":
+                        {
+                          "raw": "localhost:8080/event",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["event"],
+                          "query":
+                            [
+                              {
+                                "key": "eventId",
+                                "value": "1",
+                                "type": "text",
+                                "disabled": true,
+                              },
+                              {
+                                "key": "eventName",
+                                "value": "Demo",
+                                "disabled": true,
+                              },
+                            ],
+                        },
+                    },
+                  "response": [],
+                },
+                {
+                  "name": "Update  Events",
+                  "id": "c69329ed-2d5b-46a4-9735-373b7a92b633",
+                  "protocolProfileBehavior": { "disableBodyPruning": true },
+                  "request":
+                    {
+                      "method": "PUT",
+                      "header": [],
+                      "body":
+                        {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"eventName\":\"Demo 1\"\r\n}",
+                          "options": { "raw": { "language": "json" } },
+                        },
+                      "url":
+                        {
+                          "raw": "localhost:8080/event/2",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["event", "2"],
+                        },
+                    },
+                  "response": [],
+                },
+                {
+                  "name": "Create Event",
+                  "id": "8007e644-9857-4ba0-8a1f-6b9734a6f147",
+                  "protocolProfileBehavior": { "disableBodyPruning": true },
+                  "request":
+                    {
+                      "method": "POST",
+                      "header": [],
+                      "body":
+                        {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"eventName\":\"Demo\",\r\n    \"eventDetails\":\"Tesing\"\r\n}",
+                          "options": { "raw": { "language": "json" } },
+                        },
+                      "url":
+                        {
+                          "raw": "localhost:8080/event",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["event"],
+                        },
+                    },
+                  "response": [],
+                },
+                {
+                  "name": "Delete Event",
+                  "id": "903e51f8-c37e-4abf-a068-059df8c6348b",
+                  "protocolProfileBehavior": { "disableBodyPruning": true },
+                  "request":
+                    {
+                      "method": "DELETE",
+                      "header": [],
+                      "url":
+                        {
+                          "raw": "localhost:8080/event/2",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["event", "2"],
+                        },
+                    },
+                  "response": [],
+                },
+              ],
+            "id": "1b7ca367-82ff-4763-8d98-2ec1acff52e8",
+          },
+          {
+            "name": "Commodity APIs",
+            "item":
+              [
+                {
+                  "name": "Get all Commodity",
+                  "id": "b94b8df7-0073-4927-b8f1-b07c9091b9bc",
+                  "protocolProfileBehavior": { "disableBodyPruning": true },
+                  "request":
+                    {
+                      "method": "GET",
+                      "header": [],
+                      "url":
+                        {
+                          "raw": "localhost:8080/commodity",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["commodity"],
+                          "query":
+                            [
+                              {
+                                "key": "slNo",
+                                "value": "1234",
+                                "disabled": true,
+                              },
+                              {
+                                "key": "commodityType",
+                                "value": "Cereals",
+                                "type": "text",
+                                "disabled": true,
+                              },
+                              {
+                                "key": "CommodityName",
+                                "value": "Rice",
+                                "disabled": true,
+                              },
+                            ],
+                        },
+                    },
+                  "response": [],
+                },
+                {
+                  "name": "Create Commodity",
+                  "id": "9b1f87df-4269-49d5-8033-d08e5c91ec98",
+                  "protocolProfileBehavior": { "disableBodyPruning": true },
+                  "request":
+                    {
+                      "method": "POST",
+                      "header": [],
+                      "body":
+                        {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"slNo\":124,\r\n    \"commodityType\":\"Cereals\",\r\n    \"commodityName\":\"Ragi\",\r\n    \"quantity\": 200,\r\n    \"price\":30.5\r\n}",
+                          "options": { "raw": { "language": "json" } },
+                        },
+                      "url":
+                        {
+                          "raw": "localhost:8080/commodity",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["commodity"],
+                        },
+                    },
+                  "response": [],
+                },
+                {
+                  "name": "Update Commodity",
+                  "id": "c51904fb-2030-47e7-a086-6a9ea6374520",
+                  "protocolProfileBehavior": { "disableBodyPruning": true },
+                  "request":
+                    {
+                      "method": "PUT",
+                      "header": [],
+                      "body":
+                        {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"commodityName\": \"Rice-01\"\r\n    \r\n}",
+                          "options": { "raw": { "language": "json" } },
+                        },
+                      "url":
+                        {
+                          "raw": "localhost:8080/commodity/124",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["commodity", "124"],
+                        },
+                    },
+                  "response": [],
+                },
+                {
+                  "name": "Update Commodity Copy",
+                  "id": "d892beb8-1ebc-4154-be55-678fe93575ee",
+                  "protocolProfileBehavior": { "disableBodyPruning": true },
+                  "request":
+                    {
+                      "method": "DELETE",
+                      "header": [],
+                      "url":
+                        {
+                          "raw": "localhost:8080/commodity/124",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["commodity", "124"],
+                        },
+                    },
+                  "response": [],
+                },
+              ],
+            "id": "03fa3029-f257-4b47-8f72-9b1586064b63",
+          },
+        ],
+    },
+}

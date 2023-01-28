@@ -8,15 +8,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class CommodityDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private long slNo;
+	private Long slNo;
 	private String commodityType;
 	private String commodityName;
 	private Float quantity;
 	private Float price;
-	public long getSlNo() {
+
+	public Long getSlNo() {
 		return slNo;
 	}
-	public void setSlNo(long slNo) {
+
+	public void setSlNo(Long slNo) {
 		this.slNo = slNo;
 	}
 	public String getCommodityType() {
