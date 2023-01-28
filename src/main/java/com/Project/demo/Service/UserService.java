@@ -21,10 +21,8 @@ import com.Project.demo.dto.UserDto;
 import com.Project.demo.model.Files;
 import com.Project.demo.model.Users;
 
-import ch.qos.logback.core.joran.conditional.ElseAction;
-
 @Service
-public class UserService extends BaseService {
+public class UserService {
 
 	// @Autowired
 	// private EmployeeRepo employeeRepo;

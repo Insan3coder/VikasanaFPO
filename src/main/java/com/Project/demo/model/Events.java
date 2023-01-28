@@ -20,7 +20,7 @@ public class Events implements Serializable {
 	@Column(name = "EVENT_ID", updatable = false, nullable = false)
 	private Long eventId;
 
-	@Column(name = "EVENT_NAME")
+	@Column(name = "EVENT_NAME", unique = true)
 	private String eventName;
 	
 	@Column(name = "EVENT_DETAILS")
