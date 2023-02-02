@@ -16,13 +16,13 @@ public class Files implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public Files() {
+	public Files(String fileName, String string, byte[] bs) {
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "FILE_ID", updatable = false, nullable = false)
-	private Long fileId;
+	private String fileId;
 
 	@Column(name = "FILE_TYPE")
 	private String fileType;
@@ -31,7 +31,16 @@ public class Files implements Serializable {
 	@Column(name = "FILE_CONTENT")
 	private byte[] fileContent;
 
+	public String getFileName() {
+		return fileName;
+	}
 
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	private String fileName;
+	
 	@Column(name = "FILE_DESCRIPTION", nullable = true)
 	private String fileDescription;
 
@@ -42,12 +51,12 @@ public class Files implements Serializable {
 		this.fileDescription = fileDescription;
 	}
 
-	public Long getFileId() {
+	public String getFileId() {
 		return fileId;
 	}
 
 
-	public void setFileId(Long fileId) {
+	public void setFileId(String fileId) {
 		this.fileId = fileId;
 	}
 

@@ -18,13 +18,13 @@ public class UserDto implements Serializable {
 	private String password;
 	private Date userDOJ;
 	private String userEmail;
-	private long fileId;
+	private String fileId;
 
-	public void setFileId(long fileId) {
-		this.fileId = fileId;
+	public void setFileId(String string) {
+		this.fileId = string;
 	}
 
-	public long getFileId() {
+	public String getFileId() {
 		return fileId;
 	}
 
