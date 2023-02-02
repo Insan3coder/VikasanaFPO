@@ -16,7 +16,11 @@ public class Files implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public Files(String fileName, String string, byte[] bs) {
+	public Files(String fileName, String fileType, byte[] bs) {
+		this.fileName = fileName;
+		this.fileType = fileType;
+		this.fileContent = bs;
+
 	}
 
 	@Id
