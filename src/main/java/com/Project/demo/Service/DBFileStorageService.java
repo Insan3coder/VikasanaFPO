@@ -36,8 +36,8 @@ public class DBFileStorageService {
         }
     }
 
-    public Optional<Files> getFile(String fileId) {
-        return dbFileRepository.findById(fileId);
+    public Files getFile(String fileId) {
+        return dbFileRepository.findById(fileId).get();
     }
     
 }
