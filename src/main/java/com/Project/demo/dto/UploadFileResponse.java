@@ -6,12 +6,22 @@ public class UploadFileResponse {
     private String fileDownloadUri;
     private String fileType;
     private long size;
+	public String getFileDescription() {
+		return fileDescription;
+	}
 
-    public UploadFileResponse(String fileName, String fileDownloadUri, String fileType, long size) {
+	public void setFileDescription(String fileDescription) {
+		this.fileDescription = fileDescription;
+	}
+
+	private String fileDescription;
+
+    public UploadFileResponse(String fileName, String fileDownloadUri, String fileType, long size, String fileDescription) {
         this.fileName = fileName;
         this.fileDownloadUri = fileDownloadUri;
         this.fileType = fileType;
         this.size = size;
+        this.fileDescription = fileDescription;
     }
 
     public String getFileName() {

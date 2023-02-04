@@ -32,16 +32,15 @@ public class FileController {
     private DBFileStorageService dbFileStorageService;
 
     @PostMapping("/uploadFile")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) throws Exception {
-    	Files dbFile = dbFileStorageService.storeFile(file);
-
+    public UploadFileResponse uploadFile(@RequestParam(value = "fileDescription" , required = false) String jsonObject, @RequestParam("file") MultipartFile file) throws Exception {
+    	Files dbFile = dbFileStorageService.storeFile(jsonObject,file);
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(dbFile.getFileId())
                 .toUriString();
 
         return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri,
-                file.getContentType(), file.getSize());
+                file.getContentType(), file.getSize() ,dbFile.getFileDescription());
     }
 
 	// @PostMapping("/uploadMultipleFiles")

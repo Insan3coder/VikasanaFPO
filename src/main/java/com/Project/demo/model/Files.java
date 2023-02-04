@@ -19,11 +19,11 @@ public class Files implements Serializable {
 	public Files() {
 	}
 
-	public Files(String fileName, String fileType, byte[] bs) {
+	public Files(String fileName, String fileType, byte[] bs, String fileDescription) {
 		this.fileName = fileName;
 		this.fileType = fileType;
 		this.fileContent = bs;
-
+		this.fileDescription = fileDescription;
 	}
 
 	@Id
@@ -50,13 +50,6 @@ public class Files implements Serializable {
 	
 	@Column(name = "FILE_DESCRIPTION", nullable = true)
 	private String fileDescription;
-
-
-	public Files(String fileType, byte[] fileContent, String fileDescription) {
-		this.fileType = fileType;
-		this.fileContent = fileContent;
-		this.fileDescription = fileDescription;
-	}
 
 	public String getFileId() {
 		return fileId;
