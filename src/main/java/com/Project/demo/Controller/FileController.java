@@ -56,7 +56,7 @@ public class FileController {
 
 		return ResponseEntity.ok()
 				.contentType(MediaType.parseMediaType(dbFile.getFileType()))
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getFileName() + "\"")
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getFileName() + "\"" , dbFile.getFileDescription())
 				.body(new ByteArrayResource(dbFile.getFileContent()));
 	}
 
