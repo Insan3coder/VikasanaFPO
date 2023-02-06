@@ -32,15 +32,17 @@ public class FileController {
     private DBFileStorageService dbFileStorageService;
 
     @PostMapping("/uploadFile")
-    public UploadFileResponse uploadFile(@RequestParam(value = "fileDescription" , required = false) String jsonObject, @RequestParam("file") MultipartFile file) throws Exception {
-    	Files dbFile = dbFileStorageService.storeFile(jsonObject,file);
+    public UploadFileResponse uploadFile(@RequestParam(value = "fileDescription" , required = false) String jsonObject
+    		,@RequestParam(value = "filePath" , required = false) String filePath
+    		, @RequestParam("file") MultipartFile file) throws Exception {
+    	Files dbFile = dbFileStorageService.storeFile(jsonObject,filePath,file);
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(dbFile.getFileId())
                 .toUriString();
 
         return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri,
-                file.getContentType(), file.getSize() ,dbFile.getFileDescription());
+                file.getContentType(), file.getSize() ,dbFile.getFileDescription(), dbFile.getFilePath());
     }
 
 	// @PostMapping("/uploadMultipleFiles")
@@ -56,7 +58,7 @@ public class FileController {
 
 		return ResponseEntity.ok()
 				.contentType(MediaType.parseMediaType(dbFile.getFileType()))
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getFileName() + "\"" , dbFile.getFileDescription())
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getFileName() + "\"" , dbFile.getFileDescription(), dbFile.getFilePath())
 				.body(new ByteArrayResource(dbFile.getFileContent()));
 	}
 

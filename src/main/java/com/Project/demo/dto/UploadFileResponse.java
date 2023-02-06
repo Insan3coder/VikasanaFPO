@@ -14,14 +14,24 @@ public class UploadFileResponse {
 		this.fileDescription = fileDescription;
 	}
 
-	private String fileDescription;
+	public String getFilePath() {
+		return filePath;
+	}
 
-    public UploadFileResponse(String fileName, String fileDownloadUri, String fileType, long size, String fileDescription) {
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	private String fileDescription;
+	private String filePath;
+
+    public UploadFileResponse(String fileName, String fileDownloadUri, String fileType, long size, String fileDescription, String filePath) {
         this.fileName = fileName;
         this.fileDownloadUri = fileDownloadUri;
         this.fileType = fileType;
         this.size = size;
         this.fileDescription = fileDescription;
+        this.filePath = filePath;
     }
 
     public String getFileName() {

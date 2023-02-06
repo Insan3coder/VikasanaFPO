@@ -95,7 +95,9 @@ public class UserService {
 			if (file != null) {
 				String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 				Files fileDescription = null;
-				Files fileDB = new Files(fileName, file.getContentType(), file.getBytes(), fileDescription.getFileDescription());
+				Files filePath = null;
+				@SuppressWarnings("null")
+				Files fileDB = new Files(fileName, file.getContentType(), file.getBytes(), fileDescription.getFileDescription(), filePath.getFilePath());
 				userDB.setFiles(fileDB);
 			}
 			userDB.setPassword(user.getPassword());

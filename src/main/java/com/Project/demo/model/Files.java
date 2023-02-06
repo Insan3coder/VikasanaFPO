@@ -19,11 +19,12 @@ public class Files implements Serializable {
 	public Files() {
 	}
 
-	public Files(String fileName, String fileType, byte[] bs, String fileDescription) {
+	public Files(String fileName, String fileType, byte[] bs, String fileDescription, String filePath) {
 		this.fileName = fileName;
 		this.fileType = fileType;
 		this.fileContent = bs;
 		this.fileDescription = fileDescription;
+		this.filePath = filePath;
 	}
 
 	@Id
@@ -34,6 +35,17 @@ public class Files implements Serializable {
 	@Column(name = "FILE_TYPE")
 	private String fileType;
 
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	@Column(name = "FILE_PATH")
+	private String filePath;
+	
 	@Lob
 	@Column(name = "FILE_CONTENT")
 	private byte[] fileContent;
