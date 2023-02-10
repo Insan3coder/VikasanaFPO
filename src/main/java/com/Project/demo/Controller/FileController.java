@@ -2,15 +2,17 @@ package com.Project.demo.Controller;
 
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,24 +22,22 @@ import com.Project.demo.Service.DBFileStorageService;
 import com.Project.demo.dto.UploadFileResponse;
 import com.Project.demo.model.Files;
 
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
-
+@Component
 @RestController
+@RequestMapping("/file")
 public class FileController {
 
-    private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
     @Autowired
     private DBFileStorageService dbFileStorageService;
 
-    @PostMapping("/uploadFile")
+	@PostMapping()
     public UploadFileResponse uploadFile(@RequestParam(value = "fileDescription" , required = false) String jsonObject
     		,@RequestParam(value = "filePath" , required = false) String filePath
     		, @RequestParam("file") MultipartFile file) throws Exception {
     	Files dbFile = dbFileStorageService.storeFile(jsonObject,filePath,file);
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
+				.path("/file/")
                 .path(dbFile.getFileId())
                 .toUriString();
 
@@ -52,7 +52,7 @@ public class FileController {
 	// .collect(Collectors.toList());
 	// }
 
-	@GetMapping("/downloadFile/{fileId}")
+	@GetMapping("/{fileId}")
 	public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) { // Load file from database DBFile
 		Files dbFile = dbFileStorageService.getFile(fileId);
 
