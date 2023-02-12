@@ -97,11 +97,11 @@ public class UserService {
 			Users userDB = new Users();
 			if (file != null) {
 				String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-				Files fileDescription = null;
-				Files filePath = null;
-				@SuppressWarnings("null")
-				Files fileDB = new Files(fileName, file.getContentType(), file.getBytes(), fileDescription.getFileDescription(), filePath.getFilePath());
-				userDB.setFiles(fileDB);
+				String fileDescription = null;
+				String filePath = "user";
+				Files fileDb = new Files(fileName, file.getContentType(), file.getBytes(), fileDescription, filePath);
+				fileDb = fileRepo.save(fileDb);
+				userDB.setFiles(fileDb);
 			}
 			userDB.setPassword(user.getPassword());
 			userDB.setUserName(user.getUserName());
@@ -110,7 +110,10 @@ public class UserService {
 			userDB.setUserPhoneNumber(user.getUserPhoneNumber());
 			userDB.setUserEmail(user.getUserEmail());
 			userDB.setUserId(user.getUserId());
+			// if (Objects.equals(null, file))
+			// userDB.setFiles(null);
 			userRepo.save(userDB);
+
 			return "Successful";
 
 		} catch (Exception e) {

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,13 +27,13 @@ public class Users implements Serializable {
 	@Column(name = "USER_ID", updatable = false, nullable = false)
 	private Long userId;
 
-	@Column(name = "USER_EMAIL")
+	@Column(name = "USER_EMAIL", nullable = true)
 	private String userEmail;
 
-	@Column(name = "USERNAME")
+	@Column(name = "USERNAME", nullable = true)
 	private String userName;
 
-	@Column(name = "USER_PHONE_NUMBER")
+	@Column(name = "USER_PHONE_NUMBER", nullable = true)
 	private Long userPhoneNumber;
 
 	@Column(name = "USER_DESIGNATION", nullable = true)
@@ -46,12 +45,11 @@ public class Users implements Serializable {
 	@Column(name = "USER_DOJ", nullable = true)
 	private Date userDOJ;
 
-	@OneToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.REMOVE)
-	@MapsId("fileId")
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "FILE_ID", referencedColumnName = "FILE_ID", nullable = true)
 	private Files files;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.LAZY)
 	@MapsId("userId")
 	@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = true)
 	private List<UserRoleRestriction> userRoleRestrictions;
