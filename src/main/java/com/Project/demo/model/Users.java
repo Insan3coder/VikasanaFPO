@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -45,12 +45,13 @@ public class Users implements Serializable {
 	@Column(name = "USER_DOJ", nullable = true)
 	private Date userDOJ;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FILE_ID", referencedColumnName = "FILE_ID", nullable = true)
+	// @NotFound(action = NotFoundAction.IGNORE)
+	@OneToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.ALL)
+	@JoinColumn(name = "FILE_ID", referencedColumnName = "FILE_ID", nullable = true, insertable = true, updatable = true)
 	private Files files;
 
 	@OneToMany(fetch = FetchType.LAZY)
-	@MapsId("userId")
+	// @MapsId("userId")
 	@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = true)
 	private List<UserRoleRestriction> userRoleRestrictions;
 

@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -32,7 +31,7 @@ public class Events implements Serializable {
 	private String eventDetails;
 
 	@OneToMany(fetch = FetchType.LAZY)
-	@MapsId("EVENT_ID")
+	// @MapsId("EVENT_ID")
 	@JoinColumn(name = "EVENT_ID", referencedColumnName = "EVENT_ID")
 	private List<EventFileMap> eventFileMaps;
 

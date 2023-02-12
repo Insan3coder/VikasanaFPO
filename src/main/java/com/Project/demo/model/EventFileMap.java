@@ -26,12 +26,12 @@ public class EventFileMap {
 	EventFileMapPK eventFileMapPK;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@MapsId("eventId")
+	// @MapsId("eventId")
 	@JoinColumn(name = "EVENT_ID", referencedColumnName = "EVENT_ID")
 	private List<Events> events;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@MapsId("fileId")
+	// @MapsId("fileId")
 	@JoinColumn(name = "FILE_ID", referencedColumnName = "FILE_ID")
 	private List<Files> files;
 

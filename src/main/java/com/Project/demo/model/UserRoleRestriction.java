@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
@@ -18,13 +17,13 @@ public class UserRoleRestriction {
 	UserRoleRestrictionPK userRoleRestrictionPK;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@MapsId("userId")
-	@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
+	// @MapsId("userId")
+	@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = true)
 	private List<Users> users;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@MapsId("roleId")
-	@JoinColumn(name = "ROLE_ID", referencedColumnName = "ROLE_ID")
+	// @MapsId("roleId")
+	@JoinColumn(name = "ROLE_ID", referencedColumnName = "ROLE_ID", nullable = true)
 	private List<Roles> roles;
 
 	public UserRoleRestrictionPK getUserRoleRestrictionPK() {

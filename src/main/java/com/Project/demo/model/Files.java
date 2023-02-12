@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -43,8 +42,6 @@ public class Files implements Serializable {
 	@Column(name = "FILE_CONTENT")
 	private byte[] fileContent;
 
-	// @OneToOne(mappedBy = "fileId")
-	// private Users user;
 
 	public String getFilePath() {
 		return filePath;
