@@ -42,14 +42,14 @@ public class UserService {
 			LogManager.getLogger("Inside Findall");
 
 			if (Objects.isNull(userName) && Objects.isNull(designation) && Objects.isNull(userId))
-				return userRepo.findAll().stream().map(x -> assignUserstoDto(x)).collect(Collectors.toList());
+				return userRepo.findAll().stream().map(x -> assignUsersToDto(x)).collect(Collectors.toList());
 			else if (Objects.isNull(userName) && Objects.isNull(designation))
-				return userRepo.findById(userId).stream().map(x -> assignUserstoDto(x)).collect(Collectors.toList());
+				return userRepo.findById(userId).stream().map(x -> assignUsersToDto(x)).collect(Collectors.toList());
 			else if (Objects.isNull(userId) && !Objects.isNull(userName) && Objects.isNull(designation))
-				return userRepo.findByUserName(userName).stream().map(x -> assignUserstoDto(x))
+				return userRepo.findByUserName(userName).stream().map(x -> assignUsersToDto(x))
 						.collect(Collectors.toList());
 			else if (!Objects.isNull(designation))
-				return userRepo.findByUserDesignation(designation).stream().map(x -> assignUserstoDto(x))
+				return userRepo.findByUserDesignation(designation).stream().map(x -> assignUsersToDto(x))
 						.collect(Collectors.toList());
 			else
 				return null;
@@ -65,11 +65,11 @@ public class UserService {
 	public List<UserDto> getByUserDesignation(String userDesignation) {
 		LogManager.getLogger("Inside getByUserDesignation");
 		List<Users> users = userRepo.findByUserDesignation(userDesignation);
-		List<UserDto> returnList = users.stream().map(x -> assignUserstoDto(x)).collect(Collectors.toList());
+		List<UserDto> returnList = users.stream().map(x -> assignUsersToDto(x)).collect(Collectors.toList());
 		return returnList;
 	}
 
-	public UserDto assignUserstoDto(Users user) {
+	public UserDto assignUsersToDto(Users user) {
 		UserDto userDto = new UserDto();
 		userDto.setUserId(user.getUserId());
 		if (!user.getUserName().equals(null))
@@ -84,6 +84,9 @@ public class UserService {
 			userDto.setUserEmail(user.getUserEmail());
 		if (user.getFiles() != null && !user.getFiles().equals(null))
 			userDto.setFileId(user.getFiles().getFileId());
+		if (user.getUserRoleRestrictions() != null && !user.getUserRoleRestrictions().equals(null))
+			userDto.setUserRoleRestrictions(user.getUserRoleRestrictions().get(0).getRoles().stream()
+					.map(x -> x.getRoleName()).collect(Collectors.toList()));
 		return userDto;
 	}
 

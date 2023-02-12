@@ -2,6 +2,7 @@ package com.Project.demo.dto;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -19,6 +20,15 @@ public class UserDto implements Serializable {
 	private Date userDOJ;
 	private String userEmail;
 	private String fileId;
+	private List<String> userRoleRestrictions;
+
+	public List<String> getUserRoleRestrictions() {
+		return userRoleRestrictions;
+	}
+
+	public void setUserRoleRestrictions(List<String> userRoleRestrictions) {
+		this.userRoleRestrictions = userRoleRestrictions;
+	}
 
 	public void setFileId(String string) {
 		this.fileId = string;
@@ -35,22 +45,28 @@ public class UserDto implements Serializable {
 	public String getUserEmail() {
 		return userEmail;
 	}
-	//TO DO File
+
+	// TO DO File
 	public long getUserId() {
 		return userId;
 	}
+
 	public void setUserId(long userId) {
 		this.userId = userId;
 	}
+
 	public String getUserName() {
 		return userName;
 	}
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 	public Long getUserPhoneNumber() {
 		return userPhoneNumber;
 	}
+
 	public void setUserPhoneNumber(long userPhoneNumber) {
 		this.userPhoneNumber = userPhoneNumber;
 	}
@@ -62,20 +78,21 @@ public class UserDto implements Serializable {
 	public void setUserDesignation(String userDesignation) {
 		this.userDesignation = userDesignation;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public Date getUserDOJ() {
 		return userDOJ;
 	}
+
 	public void setUserDOJ(Date userDOJ) {
 		this.userDOJ = userDOJ;
 	}
-
-
-
 
 }

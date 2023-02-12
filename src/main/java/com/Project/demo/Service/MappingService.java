@@ -1,5 +1,7 @@
 package com.Project.demo.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
@@ -51,8 +53,10 @@ public class MappingService {
             Users user = userRepo.findById(map.getUserId()).get();
             Roles role = roleRepo.findById(map.getRoleId()).get();
             UserRoleRestriction ur = new UserRoleRestriction();
-            ur.setRoles(role);
-            ur.setUsers(user);
+            List<Roles> existingRoles = user.getUserRoleRestrictions().get(0).getRoles();
+            existingRoles.add(role);
+            ur.setRoles(existingRoles);
+            ur.setUsers(new ArrayList<>(List.of(user)));
             userRoleRestrictionRepo.save(ur);
         }
 
@@ -60,8 +64,10 @@ public class MappingService {
             Files file = fileRepo.findById(map.getFileId()).get();
             Events event = eventRepo.findById(map.getEventId()).get();
             EventFileMap ef = new EventFileMap();
-            ef.setEvents(event);
-            ef.setFiles(file);
+            List<Files> existingFiles = event.getEventFileMaps().get(0).getFiles();
+            existingFiles.add(file);
+            ef.setFiles(existingFiles);
+            ef.setEvents(new ArrayList<>(List.of(event)));
             eventFileMapRepo.save(ef);
         }
 

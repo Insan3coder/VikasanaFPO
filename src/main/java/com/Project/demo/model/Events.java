@@ -1,12 +1,17 @@
 package com.Project.demo.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +30,11 @@ public class Events implements Serializable {
 	
 	@Column(name = "EVENT_DETAILS")
 	private String eventDetails;
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@MapsId("EVENT_ID")
+	@JoinColumn(name = "EVENT_ID", referencedColumnName = "EVENT_ID")
+	private List<EventFileMap> eventFileMaps;
 
 	public Long getEventId() {
 		return eventId;
@@ -48,6 +58,14 @@ public class Events implements Serializable {
 
 	public void setEventDetails(String eventDetails) {
 		this.eventDetails = eventDetails;
+	}
+
+	public List<EventFileMap> getEventFileMaps() {
+		return eventFileMaps;
+	}
+
+	public void setEventFileMaps(List<EventFileMap> eventFileMaps) {
+		this.eventFileMaps = eventFileMaps;
 	}
 
 }

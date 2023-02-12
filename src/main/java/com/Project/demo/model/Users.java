@@ -1,9 +1,10 @@
 package com.Project.demo.model;
 
 import java.io.Serializable;
-
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -35,12 +37,6 @@ public class Users implements Serializable {
 	@Column(name = "USER_PHONE_NUMBER")
 	private Long userPhoneNumber;
 
-	/*
-	 * @Column(name = "EMPLOYEE_EMAIL", unique = true) private String employeeEmail;
-	 * 
-	 * @Column(name = "IS_MANAGER") private boolean isManager;
-	 */
-
 	@Column(name = "USER_DESIGNATION", nullable = true)
 	private String userDesignation;
 
@@ -50,11 +46,15 @@ public class Users implements Serializable {
 	@Column(name = "USER_DOJ", nullable = true)
 	private Date userDOJ;
 
-
-	@OneToOne(fetch = FetchType.LAZY, optional = true)
+	@OneToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.REMOVE)
 	@MapsId("fileId")
 	@JoinColumn(name = "FILE_ID", referencedColumnName = "FILE_ID", nullable = true)
 	private Files files;
+
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@MapsId("userId")
+	@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = true)
+	private List<UserRoleRestriction> userRoleRestrictions;
 
 	public Files getFiles() {
 		return files;
@@ -120,19 +120,12 @@ public class Users implements Serializable {
 		return userEmail;
 	}
 
-	/*
-	 * // @JsonIgnore
-	 * 
-	 * @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY) private
-	 * List<EmployeeToTechnology> technologies;
-	 * 
-	 * @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY) private
-	 * List<EmployeeToProject> projects;
-	 * 
-	 * public List<EmployeeToProject> getProjects() { return projects; }
-	 * 
-	 * public void setProjects(List<EmployeeToProject> projects) { this.projects =
-	 * projects; }
-	 */
+	public List<UserRoleRestriction> getUserRoleRestrictions() {
+		return userRoleRestrictions;
+	}
+
+	public void setUserRoleRestrictions(List<UserRoleRestriction> userRoleRestrictions) {
+		this.userRoleRestrictions = userRoleRestrictions;
+	}
 
 }

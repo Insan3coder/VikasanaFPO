@@ -1,10 +1,9 @@
 package com.Project.demo.Controller;
 
-import java.util.List;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,17 +24,15 @@ import com.Project.demo.dto.UserDto;
 
 @Component
 @RestController()
-//@CrossOrigin(origins = "http://localhost:8081")
+// @CrossOrigin(origins = "http://localhost:8081")
 @RequestMapping("/user")
 public class UserController { // extends BaseController {
 
 	// @Autowired
 	// private UserRepo userRepo;
-	  
-	  @Autowired 
-	  private UserService userService;
 
-	private Logger logger = LogManager.getLogger(UserController.class);
+	@Autowired
+	private UserService userService;
 
 	// @GetMapping(value = "/{designation}")
 	// @ResponseStatus(code = HttpStatus.OK)
@@ -47,13 +44,13 @@ public class UserController { // extends BaseController {
 	// return listEmployee;
 	// // return "index.html";
 	// }
-	
+
 	@GetMapping()
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<UserDto> getAll(@RequestParam(value = "designation", required = false) String designation,
 			@RequestParam(value = "userId", required = false) Long userId,
-			@RequestParam(value = "userName") String userName) {
-		LogManager.getLogger("Inside Findall");
+			@RequestParam(value = "userName", required = false) String userName) {
+		LogManager.getLogger("Inside findAll");
 		List<UserDto> users = userService.getUserslistAll(designation, userId, userName);
 		return users;
 	}
@@ -62,19 +59,19 @@ public class UserController { // extends BaseController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public ResponseEntity<Object> createUser(@RequestParam(value = "file", required = false) MultipartFile file,
 			@RequestBody UserDto user) throws IOException {
-//		if (file.isEmpty()) {
-//			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//		}
-String str = userService.createUser(file, user);
-if (str.equals("Successful"))
-	return new ResponseEntity<>(HttpStatus.CREATED);
-else
-	return new ResponseEntity<Object>(str, null, HttpStatus.BAD_REQUEST);
+		// if (file.isEmpty()) {
+		// return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		// }
+		String str = userService.createUser(file, user);
+		if (str.equals("Successful"))
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		else
+			return new ResponseEntity<Object>(str, null, HttpStatus.BAD_REQUEST);
 	}
-	
+
 	@DeleteMapping(value = "/{userName}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	public ResponseEntity<Object> deleteUser(@PathVariable("userName") String userName)  {
+	public ResponseEntity<Object> deleteUser(@PathVariable("userName") String userName) {
 		userService.removeUser(userName);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

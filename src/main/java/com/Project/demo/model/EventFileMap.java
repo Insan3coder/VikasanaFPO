@@ -1,10 +1,12 @@
 package com.Project.demo.model;
 
+import java.util.List;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
@@ -23,32 +25,32 @@ public class EventFileMap {
 	@EmbeddedId
 	EventFileMapPK eventFileMapPK;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@MapsId("eventId")
 	@JoinColumn(name = "EVENT_ID", referencedColumnName = "EVENT_ID")
-	private Events events;
+	private List<Events> events;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@MapsId("fileId")
 	@JoinColumn(name = "FILE_ID", referencedColumnName = "FILE_ID")
-	private Files files;
+	private List<Files> files;
 
 	public EventFileMap() {
 	}
 
-	public Events getEvents() {
+	public List<Events> getEvents() {
 		return events;
 	}
 
-	public void setEvents(Events events) {
+	public void setEvents(List<Events> events) {
 		this.events = events;
 	}
 
-	public Files getFiles() {
+	public List<Files> getFiles() {
 		return files;
 	}
 
-	public void setFiles(Files files) {
+	public void setFiles(List<Files> files) {
 		this.files = files;
 	}
 

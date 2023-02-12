@@ -1,9 +1,12 @@
 package com.Project.demo.model;
+
+import java.util.List;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
@@ -14,15 +17,15 @@ public class UserRoleRestriction {
 	@EmbeddedId
 	UserRoleRestrictionPK userRoleRestrictionPK;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@MapsId("userId")
 	@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
-	private Users users;
+	private List<Users> users;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@MapsId("roleId")
 	@JoinColumn(name = "ROLE_ID", referencedColumnName = "ROLE_ID")
-	private Roles roles;
+	private List<Roles> roles;
 
 	public UserRoleRestrictionPK getUserRoleRestrictionPK() {
 		return userRoleRestrictionPK;
@@ -32,19 +35,19 @@ public class UserRoleRestriction {
 		this.userRoleRestrictionPK = userRoleRestrictionPK;
 	}
 
-	public Users getUsers() {
+	public List<Users> getUsers() {
 		return users;
 	}
 
-	public void setUsers(Users users) {
+	public void setUsers(List<Users> users) {
 		this.users = users;
 	}
 
-	public Roles getRoles() {
+	public List<Roles> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Roles roles) {
+	public void setRoles(List<Roles> roles) {
 		this.roles = roles;
 	}
 
