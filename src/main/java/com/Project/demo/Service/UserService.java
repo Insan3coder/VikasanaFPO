@@ -84,10 +84,11 @@ public class UserService {
 			userDto.setUserEmail(user.getUserEmail());
 		if (user.getFiles() != null && !user.getFiles().equals(null))
 			userDto.setFileId(user.getFiles().getFileId());
-		if (user.getUserRoleRestrictions() != null &&
-				!user.getUserRoleRestrictions().equals(null))
+		if (user.getUserRoleRestrictions().size() != 0)
 			userDto.setUserRoleRestrictions(user.getUserRoleRestrictions().get(0).getRoles().stream()
 					.map(x -> x.getRoleName()).collect(Collectors.toList()));
+		if (Objects.nonNull(user.getFiles()))
+			userDto.setFileId(user.getFiles().getFileId());
 		return userDto;
 	}
 

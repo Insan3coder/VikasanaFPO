@@ -42,7 +42,6 @@ public class Files implements Serializable {
 	@Column(name = "FILE_CONTENT")
 	private byte[] fileContent;
 
-
 	public String getFilePath() {
 		return filePath;
 	}

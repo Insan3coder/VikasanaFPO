@@ -16,6 +16,14 @@ public class UserRoleRestrictionPK implements Serializable {
 	@Column(name = "ROLE_ID")
 	private Long roleId;
 
+	public UserRoleRestrictionPK() {
+	}
+
+	public UserRoleRestrictionPK(Long userID, Long roleId) {
+		this.userID = userID;
+		this.roleId = roleId;
+	}
+
 	public Long getUserID() {
 		return userID;
 	}

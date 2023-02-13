@@ -16,7 +16,12 @@ public class EventFileMapPK implements Serializable {
 	private Long eventId;
 
 	@Column(name = "FILE_ID")
-	private Long fileId;
+	private String fileId;
+
+	public EventFileMapPK(Long eventId, String fileId) {
+		this.eventId = eventId;
+		this.fileId = fileId;
+	}
 
 	public Long getEventId() {
 		return eventId;
@@ -26,11 +31,11 @@ public class EventFileMapPK implements Serializable {
 		this.eventId = eventId;
 	}
 
-	public Long getFileId() {
+	public String getFileId() {
 		return fileId;
 	}
 
-	public void setFileId(Long fileId) {
+	public void setFileId(String fileId) {
 		this.fileId = fileId;
 	}
 }

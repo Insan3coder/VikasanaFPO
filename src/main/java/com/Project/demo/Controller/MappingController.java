@@ -20,18 +20,6 @@ public class MappingController {
     @Autowired
     private MappingService mappingService;
 
-    // @GetMapping("/downloadFile/{fileId}")
-    // public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) {
-    // // Load file from database DBFile
-    // Files dbFile = dbFileStorageService.getFile(fileId);
-
-    // return ResponseEntity.ok()
-    // .contentType(MediaType.parseMediaType(dbFile.getFileType()))
-    // .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +
-    // dbFile.getFileName() + "\"",
-    // dbFile.getFileDescription(), dbFile.getFilePath())
-    // .body(new ByteArrayResource(dbFile.getFileContent()));
-    // }
 
     @PostMapping()
     @ResponseStatus(code = HttpStatus.CREATED)
