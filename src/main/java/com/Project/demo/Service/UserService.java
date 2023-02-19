@@ -10,6 +10,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContextException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,8 +33,15 @@ public class UserService {
 	@Autowired
 	private FileRepo fileRepo;
 
+	PasswordEncoder passwordEncoder;
+	
 	private Logger logger = LogManager.getLogger(UserService.class);
 
+	public UserService(UserRepo userRepo) {
+		this.userRepo = userRepo;
+		this.passwordEncoder = new BCryptPasswordEncoder();
+	}
+	
 	@Transactional(readOnly = true)
 	public List<UserDto> getUsersListAll(String designation, Long userId, String userName) {
 		try {
@@ -106,7 +115,8 @@ public class UserService {
 				fileDb = fileRepo.save(fileDb);
 				userDB.setFiles(fileDb);
 			}
-			userDB.setPassword(user.getPassword());
+			String encodePassword = this.passwordEncoder.encode(user.getPassword());
+			userDB.setPassword(encodePassword);
 			userDB.setUserName(user.getUserName());
 			userDB.setUserDesignation(user.getUserDesignation());
 			userDB.setUserDOJ(user.getUserDOJ());
