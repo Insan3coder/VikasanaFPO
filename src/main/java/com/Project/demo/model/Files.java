@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -19,7 +18,7 @@ public class Files implements Serializable {
 	public Files() {
 	}
 
-	public Files(String fileName, String fileType, byte[] bs, String fileDescription, String filePath) {
+	public Files(String fileName, String fileType, String bs, String fileDescription, String filePath) {
 		this.fileName = fileName;
 		this.fileType = fileType;
 		this.fileContent = bs;
@@ -30,17 +29,16 @@ public class Files implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "FILE_ID", updatable = false, nullable = false)
-	private String fileId;
+	private Long fileId;
 
 	@Column(name = "FILE_TYPE")
 	private String fileType;
 
-	@Column(name = "FILE_PATH")
+	@Column(name = "FILE_PATH", nullable = false)
 	private String filePath;
 
-	@Lob
-	@Column(name = "FILE_CONTENT")
-	private byte[] fileContent;
+	@Column(name = "FILE_CONTENT", nullable = false)
+	private String fileContent;
 
 	public String getFilePath() {
 		return filePath;
@@ -63,11 +61,11 @@ public class Files implements Serializable {
 	@Column(name = "FILE_DESCRIPTION", nullable = true)
 	private String fileDescription;
 
-	public String getFileId() {
+	public Long getFileId() {
 		return fileId;
 	}
 
-	public void setFileId(String fileId) {
+	public void setFileId(Long fileId) {
 		this.fileId = fileId;
 	}
 
@@ -79,11 +77,11 @@ public class Files implements Serializable {
 		this.fileType = fileType;
 	}
 
-	public byte[] getFileContent() {
+	public String getFileContent() {
 		return fileContent;
 	}
 
-	public void setFileContent(byte[] fileContent) {
+	public void setFileContent(String fileContent) {
 		this.fileContent = fileContent;
 	}
 

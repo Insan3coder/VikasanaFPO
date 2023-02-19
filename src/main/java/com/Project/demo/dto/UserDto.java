@@ -19,7 +19,52 @@ public class UserDto implements Serializable {
 	private String password;
 	private Date userDOJ;
 	private String userEmail;
-	private String fileId;
+	private String fileType;
+	private Long fileId;
+	private String fileName;
+	private String filePath;
+	private String fileContent;
+
+	public Long getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(Long fileId) {
+		this.fileId = fileId;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public void setFileContent(String fileContent) {
+		this.fileContent = fileContent;
+	}
+
+	public String getFileContent() {
+		return fileContent;
+	}
+
 	private List<String> userRoleRestrictions;
 
 	public List<String> getUserRoleRestrictions() {
@@ -30,13 +75,6 @@ public class UserDto implements Serializable {
 		this.userRoleRestrictions = userRoleRestrictions;
 	}
 
-	public void setFileId(String string) {
-		this.fileId = string;
-	}
-
-	public String getFileId() {
-		return fileId;
-	}
 
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;

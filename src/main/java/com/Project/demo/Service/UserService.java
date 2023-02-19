@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContextException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.Project.demo.dao.FileRepo;
 import com.Project.demo.dao.UserRepo;
@@ -36,7 +34,7 @@ public class UserService {
 	private Logger logger = LogManager.getLogger(UserService.class);
 
 	@Transactional(readOnly = true)
-	public List<UserDto> getUserslistAll(String designation, Long userId, String userName) {
+	public List<UserDto> getUsersListAll(String designation, Long userId, String userName) {
 		try {
 
 			LogManager.getLogger("Inside Findall");
@@ -93,15 +91,18 @@ public class UserService {
 	}
 
 	@Transactional(readOnly = false, rollbackFor = SQLException.class)
-	public String createUser(MultipartFile file, UserDto user) throws IOException {
+	public Boolean createUser(UserDto user) throws IOException {
 		try {
-
 			Users userDB = new Users();
-			if (file != null) {
-				String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-				String fileDescription = null;
+			if (Objects.nonNull(user.getFileContent())) {
+				Files fileDb = new Files();
+				fileDb.setFileContent(user.getFileContent());
+				if (Objects.nonNull(user.getFileName()))
+					fileDb.setFileName(user.getFileName());
+				if (Objects.nonNull(user.getFileType()))
+					fileDb.setFileType(user.getFileType());
 				String filePath = "user";
-				Files fileDb = new Files(fileName, file.getContentType(), file.getBytes(), fileDescription, filePath);
+				fileDb.setFilePath(filePath);
 				fileDb = fileRepo.save(fileDb);
 				userDB.setFiles(fileDb);
 			}
@@ -116,11 +117,11 @@ public class UserService {
 			// userDB.setFiles(null);
 			userRepo.save(userDB);
 
-			return "Successful";
+			return true;
 
 		} catch (Exception e) {
 			logger.error(e.getMessage());
-			return e.getMessage();
+			return false;
 		}
 	}
 
