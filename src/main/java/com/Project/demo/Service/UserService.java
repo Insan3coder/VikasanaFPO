@@ -46,7 +46,7 @@ public class UserService {
 	public List<UserDto> getUsersListAll(String designation, Long userId, String userName) {
 		try {
 
-			LogManager.getLogger("Inside Findall");
+			LogManager.getLogger("Inside findAll");
 
 			if (Objects.isNull(userName) && Objects.isNull(designation) && Objects.isNull(userId))
 				return userRepo.findAll().stream().map(x -> assignUsersToDto(x)).collect(Collectors.toList());
@@ -58,6 +58,8 @@ public class UserService {
 			else if (!Objects.isNull(designation))
 				return userRepo.findByUserDesignation(designation).stream().map(x -> assignUsersToDto(x))
 						.collect(Collectors.toList());
+			else if (!Objects.isNull(userId))
+				return userRepo.findById(userId).stream().map(x -> assignUsersToDto(x)).collect(Collectors.toList());
 			else
 				return null;
 
@@ -95,7 +97,7 @@ public class UserService {
 			userDto.setUserRoleRestrictions(user.getUserRoleRestrictions().get(0).getRoles().stream()
 					.map(x -> x.getRoleName()).collect(Collectors.toList()));
 		if (Objects.nonNull(user.getFiles()))
-			userDto.setFileId(user.getFiles().getFileId());
+			userDto.setFileContent(user.getFiles().getFileContent());
 		return userDto;
 	}
 
@@ -103,6 +105,7 @@ public class UserService {
 	public Boolean createUser(UserDto user) throws IOException {
 		try {
 			Users userDB = new Users();
+			String filePath;
 			if (Objects.nonNull(user.getFileContent())) {
 				Files fileDb = new Files();
 				fileDb.setFileContent(user.getFileContent());
@@ -110,13 +113,18 @@ public class UserService {
 					fileDb.setFileName(user.getFileName());
 				if (Objects.nonNull(user.getFileType()))
 					fileDb.setFileType(user.getFileType());
-				String filePath = "user";
+				if (Objects.nonNull(user.getFilePath()))
+					filePath = user.getFilePath();
+				else
+					filePath = "user";
 				fileDb.setFilePath(filePath);
 				fileDb = fileRepo.save(fileDb);
 				userDB.setFiles(fileDb);
 			}
-			String encodePassword = this.passwordEncoder.encode(user.getPassword());
-			userDB.setPassword(encodePassword);
+			if (Objects.nonNull(user.getPassword())) {
+				String encodePassword = this.passwordEncoder.encode(user.getPassword());
+				userDB.setPassword(encodePassword);
+			}
 			userDB.setUserName(user.getUserName());
 			userDB.setUserDesignation(user.getUserDesignation());
 			userDB.setUserDOJ(user.getUserDOJ());

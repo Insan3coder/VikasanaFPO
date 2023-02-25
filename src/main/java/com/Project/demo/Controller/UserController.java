@@ -3,7 +3,6 @@ package com.Project.demo.Controller;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,7 @@ import com.Project.demo.dto.UserDto;
 @RestController()
 // @CrossOrigin(origins = "http://localhost:8081")
 @RequestMapping("/user")
-public class UserController { // extends BaseController {
+public class UserController {
 
 	@Autowired
 	private UserService userService;
@@ -35,7 +34,7 @@ public class UserController { // extends BaseController {
 	public List<UserDto> getAll(@RequestParam(value = "designation", required = false) String designation,
 			@RequestParam(value = "userId", required = false) Long userId,
 			@RequestParam(value = "userName", required = false) String userName) {
-		LogManager.getLogger("Inside findAll");
+		// LogManager.getLogger("Inside findAll");
 		List<UserDto> users = userService.getUsersListAll(designation, userId, userName);
 		return users;
 	}

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -37,6 +38,7 @@ public class Files implements Serializable {
 	@Column(name = "FILE_PATH", nullable = false)
 	private String filePath;
 
+	@Lob
 	@Column(name = "FILE_CONTENT", nullable = false)
 	private String fileContent;
 
