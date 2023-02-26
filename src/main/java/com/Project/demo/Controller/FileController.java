@@ -2,6 +2,9 @@ package com.Project.demo.Controller;
 
 
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.Project.demo.Service.FileService;
 import com.Project.demo.dto.FileDto;
@@ -57,5 +61,24 @@ public class FileController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
+	@PostMapping("/encode")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public String encode(@RequestParam(value = "file") MultipartFile file) {
+		// File temp = new File(file.getOriginalFilename());
+		// FileOutputStream fos = new FileOutputStream(temp);
+		// fos.write(file.getBytes());
+		// fos.close();
+
+		byte[] encoded;
+		try {
+			encoded = Base64.getEncoder().encode(file.getBytes());
+			return new String(encoded, StandardCharsets.US_ASCII);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
 
 }
