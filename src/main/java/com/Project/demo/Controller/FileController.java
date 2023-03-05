@@ -28,7 +28,7 @@ import com.Project.demo.dto.FileDto;
 
 @Component
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
+// @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 @RequestMapping("/file")
 public class FileController {
 
