@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-@EnableAutoConfiguration
+// @EnableAutoConfiguration
 @EntityScan(basePackages = "com.Project.demo")
 public class ProjectV1Application {
 
@@ -15,6 +15,7 @@ public class ProjectV1Application {
 //		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 //		return sessionFactory;
 //	}
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectV1Application.class, args);
