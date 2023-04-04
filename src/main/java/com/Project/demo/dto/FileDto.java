@@ -15,6 +15,7 @@ public class FileDto implements Serializable {
     private String fileName;
     private String filePath;
     private String fileContent;
+    private String fileDescription;
 
     public Long getFileId() {
         return fileId;
@@ -54,5 +55,13 @@ public class FileDto implements Serializable {
 
     public void setFileContent(String fileContent) {
         this.fileContent = fileContent;
+    }
+
+    public String getFileDescription() {
+        return fileDescription;
+    }
+
+    public void setFileDescription(String fileDescription) {
+        this.fileDescription = fileDescription;
     }
 }

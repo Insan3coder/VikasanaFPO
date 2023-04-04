@@ -42,6 +42,12 @@ public class Files implements Serializable {
 	@Column(name = "FILE_CONTENT", nullable = false)
 	private String fileContent;
 
+	@Column(name = "FILE_DESCRIPTION", nullable = true)
+	private String fileDescription;
+
+	@Column(name = "FILE_NAME")
+	private String fileName;
+
 	public String getFilePath() {
 		return filePath;
 	}
@@ -57,11 +63,6 @@ public class Files implements Serializable {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-
-	private String fileName;
-
-	@Column(name = "FILE_DESCRIPTION", nullable = true)
-	private String fileDescription;
 
 	public Long getFileId() {
 		return fileId;
