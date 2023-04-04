@@ -148,4 +148,29 @@ public class UserService {
 		userRepo.deleteByUserName(userName);
 	}
 
+	
+	@Transactional(readOnly = true, rollbackFor = SQLException.class)
+	public UserDto loginUser(UserDto user) throws IOException {
+		try {
+			Users userDb = userRepo.findByUserEmail(user.getUserEmail());
+			
+			if (Objects.nonNull(userDb.getPassword())) {
+				String password = user.getPassword();
+				String encodedPassword = userDb.getPassword();
+				
+				Boolean isPasswordMatch = passwordEncoder.matches(password, encodedPassword);
+					if(isPasswordMatch) {
+						return assignUsersToDto(userDb);
+					} else {
+						logger.error("loginUser : Provided information not vaild");
+						throw new ApplicationContextException("Provided information not vaild");
+					}
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return null;
+		}
+		return null;
+	}
+	
 }

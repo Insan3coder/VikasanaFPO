@@ -58,4 +58,11 @@ public class UserController {
 		userService.removeUser(userName);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+	
+	@GetMapping("/login")
+	@ResponseStatus(code = HttpStatus.OK)
+	public UserDto login(@RequestBody UserDto user) throws IOException {
+		return userService.loginUser(user);
+		//return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
 }
