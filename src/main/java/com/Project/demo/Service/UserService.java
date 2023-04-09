@@ -34,14 +34,14 @@ public class UserService {
 	private FileRepo fileRepo;
 
 	PasswordEncoder passwordEncoder;
-	
+
 	private Logger logger = LogManager.getLogger(UserService.class);
 
 	public UserService(UserRepo userRepo) {
 		this.userRepo = userRepo;
 		this.passwordEncoder = new BCryptPasswordEncoder();
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<UserDto> getUsersListAll(String designation, Long userId, String userName) {
 		try {
@@ -80,8 +80,9 @@ public class UserService {
 
 	public UserDto assignUsersToDto(Users user) {
 		UserDto userDto = new UserDto();
+
 		userDto.setUserId(user.getUserId());
-		if (!user.getUserName().equals(null))
+		if (!user.getUserEmail().isEmpty())
 			userDto.setUserName(user.getUserName());
 		if (user.getUserDesignation() != null && !user.getUserDesignation().equals(null))
 			userDto.setUserDesignation(user.getUserDesignation());
@@ -99,6 +100,7 @@ public class UserService {
 		if (Objects.nonNull(user.getFiles()))
 			userDto.setFileContent(user.getFiles().getFileContent());
 		return userDto;
+
 	}
 
 	@Transactional(readOnly = false, rollbackFor = SQLException.class)
@@ -148,23 +150,22 @@ public class UserService {
 		userRepo.deleteByUserName(userName);
 	}
 
-	
 	@Transactional(readOnly = true, rollbackFor = SQLException.class)
 	public UserDto loginUser(UserDto user) throws IOException {
 		try {
 			Users userDb = userRepo.findByUserEmail(user.getUserEmail());
-			
+
 			if (Objects.nonNull(userDb.getPassword())) {
 				String password = user.getPassword();
 				String encodedPassword = userDb.getPassword();
-				
+
 				Boolean isPasswordMatch = passwordEncoder.matches(password, encodedPassword);
-					if(isPasswordMatch) {
-						return assignUsersToDto(userDb);
-					} else {
-						logger.error("loginUser : Provided information not vaild");
-						throw new ApplicationContextException("Provided information not vaild");
-					}
+				if (isPasswordMatch) {
+					return assignUsersToDto(userDb);
+				} else {
+					logger.error("loginUser : Provided information not vaild");
+					throw new ApplicationContextException("Provided information not vaild");
+				}
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -172,5 +173,5 @@ public class UserService {
 		}
 		return null;
 	}
-	
+
 }
