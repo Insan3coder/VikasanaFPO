@@ -1,6 +1,7 @@
 package com.Project.demo.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -34,6 +35,17 @@ public class Events implements Serializable {
 	// @MapsId("EVENT_ID")
 	@JoinColumn(name = "EVENT_ID", referencedColumnName = "EVENT_ID")
 	private List<EventFileMap> eventFileMaps;
+
+	@Column(name = "EVENT_DATE")
+	private Date eventDate;
+
+	public Date getEventDate() {
+		return eventDate;
+	}
+
+	public void setEventDate(Date eventDate) {
+		this.eventDate = eventDate;
+	}
 
 	public Long getEventId() {
 		return eventId;
