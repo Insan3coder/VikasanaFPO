@@ -47,6 +47,7 @@ public class EventService {
         eventDto.setEventId(event.getEventId());
         eventDto.setEventName(event.getEventName());
         eventDto.setEventDetails(event.getEventDetails());
+        eventDto.setEventDate(event.getEventDate());
         return eventDto;
     }
 
@@ -56,6 +57,7 @@ public class EventService {
             Events eventDb = new Events();
             eventDb.setEventDetails(event.getEventDetails());
             eventDb.setEventName(event.getEventName());
+            eventDb.setEventDate(event.getEventDate());
             eventRepo.save(eventDb);
             return true;
         } catch (Exception e) {
