@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class UserDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private long userId;
+	private String userId;
 	private String userName;
 	private long userPhoneNumber;
 	private String userDesignation;
@@ -85,11 +85,11 @@ public class UserDto implements Serializable {
 	}
 
 	// TO DO File
-	public long getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

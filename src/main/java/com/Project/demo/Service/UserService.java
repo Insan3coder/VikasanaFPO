@@ -82,13 +82,13 @@ public class UserService {
 		UserDto userDto = new UserDto();
 
 		userDto.setUserId(user.getUserId());
-		if (!user.getUserEmail().isEmpty())
+		if (!Objects.isNull(user.getUserEmail()))
 			userDto.setUserName(user.getUserName());
-		if (user.getUserDesignation() != null && !user.getUserDesignation().equals(null))
+		if (!Objects.isNull(user.getUserDesignation()))
 			userDto.setUserDesignation(user.getUserDesignation());
-		if (user.getUserDOJ() != null && !user.getUserDOJ().equals(null))
+		if (!Objects.isNull(user.getUserDOJ()))
 			userDto.setUserDOJ(user.getUserDOJ());
-		if (user.getUserPhoneNumber() != null && !user.getUserPhoneNumber().equals(null))
+		if (!Objects.isNull(user.getUserPhoneNumber()))
 			userDto.setUserPhoneNumber(user.getUserPhoneNumber());
 		if (user.getUserEmail() != null && !user.getUserEmail().equals(null))
 			userDto.setUserEmail(user.getUserEmail());
@@ -99,6 +99,8 @@ public class UserService {
 					.map(x -> x.getRoleName()).collect(Collectors.toList()));
 		if (Objects.nonNull(user.getFiles()))
 			userDto.setFileContent(user.getFiles().getFileContent());
+		if (!Objects.isNull(user.getUserName()))
+			userDto.setUserName(user.getUserName());
 		return userDto;
 
 	}
