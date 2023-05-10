@@ -3,9 +3,8 @@ package com.Project.demo.dto;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+// @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FileDto implements Serializable {
 
@@ -14,8 +13,8 @@ public class FileDto implements Serializable {
     private String fileType;
     private String fileName;
     private String filePath;
-    private String fileContent;
     private String fileDescription;
+    private String fileContent;
 
     public Long getFileId() {
         return fileId;

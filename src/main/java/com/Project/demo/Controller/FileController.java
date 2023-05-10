@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -64,16 +65,20 @@ public class FileController {
 
 	@PostMapping("/encode")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public String encode(@RequestParam(value = "file") MultipartFile file) {
+	public FileDto encode(@RequestParam(value = "file") MultipartFile file) {
 		// File temp = new File(file.getOriginalFilename());
 		// FileOutputStream fos = new FileOutputStream(temp);
 		// fos.write(file.getBytes());
 		// fos.close();
 
 		byte[] encoded;
+		FileDto filedto = new FileDto();
 		try {
 			encoded = Base64.getEncoder().encode(file.getBytes());
-			return new String(encoded, StandardCharsets.US_ASCII);
+			filedto.setFileContent(new String(encoded, StandardCharsets.US_ASCII));
+			filedto.setFileName(file.getOriginalFilename());
+			filedto.setFileType(FilenameUtils.getExtension(file.getOriginalFilename()));
+			return filedto;
 
 		} catch (IOException e) {
 			e.printStackTrace();

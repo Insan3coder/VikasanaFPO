@@ -4,11 +4,15 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+
+import com.Project.demo.Path;
 
 @Entity
 @Table(name = "FILES")
@@ -19,7 +23,7 @@ public class Files implements Serializable {
 	public Files() {
 	}
 
-	public Files(String fileName, String fileType, String bs, String fileDescription, String filePath) {
+	public Files(String fileName, String fileType, String bs, String fileDescription, Path filePath) {
 		this.fileName = fileName;
 		this.fileType = fileType;
 		this.fileContent = bs;
@@ -32,11 +36,12 @@ public class Files implements Serializable {
 	@Column(name = "FILE_ID", updatable = false, nullable = false)
 	private Long fileId;
 
-	@Column(name = "FILE_TYPE")
+	@Column(name = "FILE_TYPE", updatable = false, nullable = false)
 	private String fileType;
 
-	@Column(name = "FILE_PATH", nullable = false)
-	private String filePath;
+	@Column(name = "FILE_PATH", nullable = false, columnDefinition = "ENUM('document','user','gallery','output_product','home_slider','home_brand')")
+	@Enumerated(EnumType.STRING)
+	private Path filePath;
 
 	@Lob
 	@Column(name = "FILE_CONTENT", nullable = false)
@@ -45,14 +50,14 @@ public class Files implements Serializable {
 	@Column(name = "FILE_DESCRIPTION", nullable = true)
 	private String fileDescription;
 
-	@Column(name = "FILE_NAME")
+	@Column(name = "FILE_NAME", updatable = false, nullable = false)
 	private String fileName;
 
-	public String getFilePath() {
+	public Path getFilePath() {
 		return filePath;
 	}
 
-	public void setFilePath(String filePath) {
+	public void setFilePath(Path filePath) {
 		this.filePath = filePath;
 	}
 

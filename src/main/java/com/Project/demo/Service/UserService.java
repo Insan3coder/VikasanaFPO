@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.Project.demo.Path;
 import com.Project.demo.dao.FileRepo;
 import com.Project.demo.dao.UserRepo;
 import com.Project.demo.dto.UserDto;
@@ -109,7 +110,6 @@ public class UserService {
 	public Boolean createUser(UserDto user) throws IOException {
 		try {
 			Users userDB = new Users();
-			String filePath;
 			if (Objects.nonNull(user.getFileContent())) {
 				Files fileDb = new Files();
 				fileDb.setFileContent(user.getFileContent());
@@ -117,10 +117,10 @@ public class UserService {
 					fileDb.setFileName(user.getFileName());
 				if (Objects.nonNull(user.getFileType()))
 					fileDb.setFileType(user.getFileType());
-				if (Objects.nonNull(user.getFilePath()))
-					filePath = user.getFilePath();
-				else
-					filePath = "user";
+				// if (Objects.nonNull(user.getFilePath()))
+				// filePath = user.getFilePath();
+				// else
+				Path filePath = Path.user;
 				fileDb.setFilePath(filePath);
 				fileDb = fileRepo.save(fileDb);
 				userDB.setFiles(fileDb);
