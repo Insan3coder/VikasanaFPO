@@ -59,20 +59,19 @@ public class MappingService {
             Users user = userRepo.findById(map.getUserId()).get();
             Roles role = roleRepo.findById(map.getRoleId()).get();
             UserRoleRestriction ur = new UserRoleRestriction();
-            if (user.getUserRoleRestrictions().size() > 0) {
-                List<Roles> existingRoles = user.getUserRoleRestrictions().get(0).getRoles();
-                existingRoles.add(role);
-                ur.setRoles(existingRoles);
-            } else {
-                ur.setRoles(new ArrayList<>(List.of(role)));
-            }
-            UserRoleRestrictionPK urPk = new UserRoleRestrictionPK(user.getUserId(), role.getRoleId());
+            ur.setRoles(role);
+            ur.setUsers(user);
+            List<UserRoleRestriction> existingRoles = user.getUserRoleRestrictions();
+            existingRoles.add(ur);
+            UserRoleRestrictionPK urPk = new UserRoleRestrictionPK(user.getUserId(),
+                    role.getRoleId());
             ur.setUserRoleRestrictionPK(urPk);
-            ur.setUsers(new ArrayList<>(List.of(user)));
+            // ur.setUsers(new ArrayList<>(List.of(user)));
             userRoleRestrictionRepo.save(ur);
+            return;
         }
 
-        if (!Objects.isNull(map.getFileId()) && !Objects.isNull(map.getEventId())) {
+        else if (!Objects.isNull(map.getFileId()) && !Objects.isNull(map.getEventId())) {
             Files file = fileRepo.findById(map.getFileId()).get();
             Events event = eventRepo.findById(map.getEventId()).get();
             EventFileMap ef = new EventFileMap();

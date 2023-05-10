@@ -11,7 +11,7 @@ public class MappingDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Long roleId;
-    private Long userId;
+    private String userId;
     private Long FileId;
     private Long EventId;
 
@@ -23,11 +23,11 @@ public class MappingDto implements Serializable {
         this.roleId = roleId;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

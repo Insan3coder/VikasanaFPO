@@ -43,7 +43,7 @@ public class UserService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<UserDto> getUsersListAll(String designation, Long userId, String userName) {
+	public List<UserDto> getUsersListAll(String designation, String userId, String userName) {
 		try {
 
 			LogManager.getLogger("Inside findAll");
@@ -95,8 +95,8 @@ public class UserService {
 		if (user.getFiles() != null && !user.getFiles().equals(null))
 			userDto.setFileId(user.getFiles().getFileId());
 		if (user.getUserRoleRestrictions().size() != 0)
-			userDto.setUserRoleRestrictions(user.getUserRoleRestrictions().get(0).getRoles().stream()
-					.map(x -> x.getRoleName()).collect(Collectors.toList()));
+			userDto.setUserRoleRestrictions(user.getUserRoleRestrictions().stream()
+					.map(x -> x.getRoles().getRoleName()).collect(Collectors.toList()));
 		if (Objects.nonNull(user.getFiles()))
 			userDto.setFileContent(user.getFiles().getFileContent());
 		if (!Objects.isNull(user.getUserName()))
@@ -165,8 +165,8 @@ public class UserService {
 				if (isPasswordMatch) {
 					return assignUsersToDto(userDb);
 				} else {
-					logger.error("loginUser : Provided information not vaild");
-					throw new ApplicationContextException("Provided information not vaild");
+					logger.error("loginUser : Provided information not valid");
+					throw new ApplicationContextException("Provided information not valid");
 				}
 			}
 		} catch (Exception e) {

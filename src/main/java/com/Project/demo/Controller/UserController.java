@@ -32,7 +32,7 @@ public class UserController {
 	@GetMapping()
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<UserDto> getAll(@RequestParam(value = "designation", required = false) String designation,
-			@RequestParam(value = "userId", required = false) Long userId,
+			@RequestParam(value = "userId", required = false) String userId,
 			@RequestParam(value = "userName", required = false) String userName) {
 		// LogManager.getLogger("Inside findAll");
 		List<UserDto> users = userService.getUsersListAll(designation, userId, userName);

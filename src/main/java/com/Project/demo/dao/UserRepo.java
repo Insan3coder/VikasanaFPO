@@ -9,7 +9,7 @@ import com.Project.demo.model.Users;
 
 
 @Repository
-public interface UserRepo extends JpaRepository<Users,Long>{ 
+public interface UserRepo extends JpaRepository<Users, String> {
 	
 	List<Users> findByUserName(String userName);
 

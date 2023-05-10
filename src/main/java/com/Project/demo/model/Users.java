@@ -53,8 +53,8 @@ public class Users implements Serializable {
 	private Files files;
 
 	@OneToMany(fetch = FetchType.LAZY)
-	// @MapsId("userId")
-	@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = true)
+	// @MapsId("USER_ID")
+	@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = true, insertable = true, updatable = true)
 	private List<UserRoleRestriction> userRoleRestrictions;
 
 	public Files getFiles() {

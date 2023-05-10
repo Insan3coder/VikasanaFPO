@@ -1,12 +1,16 @@
 package com.Project.demo.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +26,11 @@ public class Roles implements Serializable {
 
 	@Column(name = "ROLE_NAME", nullable = false, unique = true)
 	private String roleName;
+
+	@OneToMany(fetch = FetchType.LAZY)
+	// @MapsId("userId")
+	@JoinColumn(name = "ROLE_ID", referencedColumnName = "ROLE_ID")
+	private List<UserRoleRestriction> userRoleRestrictions;
 
 	public Long getRoleId() {
 		return roleId;
