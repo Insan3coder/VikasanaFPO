@@ -11,6 +11,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.Project.demo.Path;
 import com.Project.demo.Service.FileService;
 import com.Project.demo.dto.FileDto;
 
@@ -38,7 +40,7 @@ public class FileController {
 
 	@GetMapping()
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<FileDto> getAll(@RequestParam(value = "filePath", required = false) String filePath,
+	public List<FileDto> getAll(@RequestParam(value = "filePath", required = false) Path filePath,
 			@RequestParam(value = "fileId", required = false) Long fileId,
 			@RequestParam(value = "fileName", required = false) String fileName,
 			@RequestParam(value = "fileType", required = false) String fileType) {
@@ -85,6 +87,13 @@ public class FileController {
 		}
 		return null;
 
+	}
+
+	@GetMapping("/decode")
+	@ResponseStatus(code = HttpStatus.OK)
+	public byte[] decode(@RequestBody FileDto file) {
+		return Base64.getDecoder().decode(file.getFileContent());
+		// return new MockMultipartFile(file.getFileName(), imageByteArray);
 	}
 
 }

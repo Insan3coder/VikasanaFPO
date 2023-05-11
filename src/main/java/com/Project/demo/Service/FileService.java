@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContextException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.Project.demo.Path;
 import com.Project.demo.dao.FileRepository;
 import com.Project.demo.dto.FileDto;
 import com.Project.demo.model.Files;
@@ -41,7 +42,7 @@ public class FileService {
     }
 
     @Transactional(readOnly = true)
-    public List<FileDto> getFiles(String filePath, Long fileId, String fileName, String fileType) {
+    public List<FileDto> getFiles(Path filePath, Long fileId, String fileName, String fileType) {
         try {
             if (!Objects.isNull(filePath))
                 return fileRepo.findByFilePath(filePath).stream().map(x -> assignFileToDto(x))
